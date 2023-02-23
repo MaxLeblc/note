@@ -1,0 +1,46 @@
+.container {
+    position: absolute;
+    cursor: move;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: rgb(255, 255, 118);
+    box-shadow: 0 .5rem 1rem rgba(92, 92, 1, 0.2);
+    max-width: 30rem;
+    // min-height: 9rem;
+    border-radius: .5rem;
+    padding: .5rem 1rem;
+    white-space: pre-wrap;
+}
+
+.description {
+    & h4 {
+        margin: 1rem 0;
+    }
+
+    & p {
+        margin-bottom: 1rem;
+    }
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & p {
+        font-size: 14px;
+        font-style: italic;
+        color: rgb(120, 120, 120);
+        margin-right: 2rem;
+    }
+
+    & .icon {
+        color: rgb(120, 120, 120);
+        cursor: pointer;
+    }
+}
