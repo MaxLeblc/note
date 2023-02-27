@@ -7,7 +7,7 @@
     background: rgb(255, 255, 118);
     box-shadow: 0 .5rem 1rem rgba(92, 92, 1, 0.2);
     width: 25rem;
-    height: 30rem;
+    min-height: 30rem;
     border-radius: .5rem;
     padding: .5rem 1rem;
     white-space: pre-wrap;
@@ -63,7 +63,7 @@
         background: none;
         font-family: 'Noto Sans', sans-serif;
         font-size: 16px;
-        margin-top: 1rem;
+        margin: 1rem 0;
     }
 }
 

@@ -20,3 +20,13 @@
 .title a:hover, .title a:focus, .title a:active {
   text-decoration: underline;
 }
+
+.warningSize {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background: #0070f3;
+  color: #fff;
+}
