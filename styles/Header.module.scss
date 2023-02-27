@@ -17,6 +17,7 @@
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
     padding: .5rem 1rem;
+    margin: 0 1rem;
 }
 
 .searchBar {
@@ -26,15 +27,10 @@
     margin-left: .5rem;
 
     &::placeholder {
-        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        /* Chrome, Firefox, Opera, Safari */
         color: rgb(120, 120, 120);
         opacity: 1;
         /* Firefox */
-    }
-
-    &:-ms-input-placeholder {
-        /* Internet Explorer 10-11 */
-        color: rgb(120, 120, 120);
     }
 
     &::-ms-input-placeholder {
@@ -44,17 +40,38 @@
 }
 
 .button,
+.buttonWhite,
 .buttonDark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5rem;
     height: 2rem;
     border: none;
     border-radius: 1rem;
-    padding: .5rem 1rem;
     color: #fff;
     background: #000;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+
+    &.button {
+        font-size: 26px;
+        background: rgb(96, 219, 68);
+        
+    }
+
+    &.buttonDark {
+        color: #000;
+        background: #fff;
+    }
+
+    &:hover {
+        opacity: 80%;
+    }
+    &:active {
+        scale: .95;
+    }
 }
 
-.buttonDark {
-    color: #000;
-    background: #fff;
+.icon {
+    width: 1.5rem;
 }

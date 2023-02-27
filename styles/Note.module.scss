@@ -1,27 +1,71 @@
 .container {
     position: absolute;
-    cursor: move;
-
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
     background: rgb(255, 255, 118);
     box-shadow: 0 .5rem 1rem rgba(92, 92, 1, 0.2);
-    max-width: 30rem;
-    // min-height: 9rem;
+    width: 25rem;
+    height: 30rem;
     border-radius: .5rem;
     padding: .5rem 1rem;
     white-space: pre-wrap;
+    z-index: 1000;
+
+}
+
+.handle {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    background: rgb(96, 219, 68);
+    transform: translate(-100%, -75%);
+    opacity: 10%;
+    transition: opacity 2s;
+
+    &:hover {
+        opacity: 100%;
+        cursor: move;
+    }
+
+}
+
+.iconEdit {
+    color: rgb(120, 120, 120);
+    margin: 1rem 0 0 auto;
+    opacity: 50%;
+    cursor: pointer;
+
+    &:hover {
+        color: #000;
+        opacity: 100%;
+    }
 }
 
 .description {
-    & h4 {
-        margin: 1rem 0;
+    & input, h3 {
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 1rem;
+
+        &:focus {
+            color: grey;
+        }
     }
 
-    & p {
-        margin-bottom: 1rem;
+    & textarea, p {
+        border: none;
+        outline: none;
+        resize: none;
+        background: none;
+        font-family: 'Noto Sans', sans-serif;
+        font-size: 16px;
+        margin-top: 1rem;
     }
 }
 
@@ -31,6 +75,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: auto;
 
     & p {
         font-size: 14px;
@@ -39,8 +84,16 @@
         margin-right: 2rem;
     }
 
-    & .icon {
+    .iconDelete {
         color: rgb(120, 120, 120);
+        opacity: 50%;
         cursor: pointer;
+
+        &:hover {
+            color: red;
+            opacity: 100%;
+        }
+
     }
+
 }

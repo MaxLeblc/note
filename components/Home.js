@@ -1,59 +1,41 @@
-import styles from '../styles/Home.module.scss';
-import NotesList from './NotesList';
-import Search from './Search';
-import { useEffect, useState } from 'react';
-import { nanoid } from 'nanoid';
+import styles from '../styles/Home.module.scss'
+import Header from './Header'
+import AddNote from './AddNote'
+import Note from './Note'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 function Home() {
-  const [notes, setNotes] = useState([])
-  // console.log("🚀 ~ file: Home.js:9 ~ Home ~ notes:", notes)
-  const [searchNote, setSearchNote] = useState('')
-  const [darkMode, setDarkMode] = useState(false)
 
+  const notes = useSelector(state => state.notes.value)
+  const modes = useSelector(state => state.modes.value)
 
-  // get note's position
-  // const [notePosition, setNotePosition] = useState({})
+  // filter notes for searchBar in Header
+  const [query, setQuery] = useState('')
 
-  const handleNotePosition = (position, i) => {
-    // setNotes({...notes, position: position})
-    // console.log(notes);
+  const handleFilteredNotes = (data) => {
+    setQuery(data)
   }
 
-  // using LocalStorage to save notes
-  useEffect(() => {
-    const savedNotes = JSON.parse(localStorage.getItem('react-note-app-data'))
-    if (savedNotes) setNotes(savedNotes)
-  }, [])
-
-  useEffect(() => {
-    localStorage.setItem('react-note-app-data', JSON.stringify(notes))
-  }, [notes])
-
-  const addNote = (title, text) => {
-    const newNote = {
-      id: nanoid(),
-      title: title,
-      text: text,
-      position: {},
-      date: new Date().toLocaleString(),
+  const filteredNotes = notes.filter(note => {
+    if (query === '') {
+      return note
+    } else if ((note.title || note.text).toLowerCase().includes(query.toLowerCase())) {
+      return note
     }
-    setNotes([...notes, newNote])
-  }
-
-  const deleteNote = (id) => {
-    setNotes(notes.filter((note) => note.id !== id))
-  }
+  }).map((note, i) => (
+    <Note
+      key={i}
+      note={note}
+    />
+  ))
 
   return (
-    <div className={`${darkMode && 'darkMode'}`} >
+    <div className={`${modes.darkMode && 'darkMode'}`} >
       <main className={styles.main}>
-        <Search handleSearchNote={setSearchNote} handleDarkMode={setDarkMode} />
-        <NotesList
-          notes={notes.filter((note) => note.text.toLocaleLowerCase().includes(searchNote))}
-          handleAddNote={addNote}
-          handleDeleteNote={deleteNote}
-          handleNotePosition={handleNotePosition} // position
-        />
+        <Header handleFilteredNotes={handleFilteredNotes} />
+        {modes.editMode && <AddNote />}
+        {filteredNotes}
       </main>
     </div>
   );
