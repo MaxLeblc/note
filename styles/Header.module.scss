@@ -1,77 +1,109 @@
 .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    width: 30rem;
     height: 4rem;
-    margin-bottom: 2rem;
+    margin-top: 4rem;
 }
 
-.searchContainer {
+.searchContainer,
+.searchContainerDark {
     display: flex;
     align-items: center;
-    min-width: 20rem;
-    height: 2rem;
-    background: rgb(233, 233, 233);
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
-    border-radius: 1rem;
-    padding: .5rem 1rem;
-    margin: 0 1rem;
+    padding: 1rem;
+    margin: 2rem;
+    border: 2px #000 solid;
+    transform: skew(-2deg, 1deg);
+
+    &:has(>.searchBar:focus) {
+        background: rgba(255, 255, 118, 1);
+    }
+
+    &.searchContainerDark {
+        color: #fff;
+        border: 2px #fff solid;
+    }
 }
 
-.searchBar {
+
+.searchBar,
+.searchBarDark {
     border: none;
     outline: none;
-    background: rgb(233, 233, 233);
     margin-left: .5rem;
+    font-family: 'Caveat Brush', cursive;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: .2rem;
+    text-transform: uppercase;
 
     &::placeholder {
-        /* Chrome, Firefox, Opera, Safari */
-        color: rgb(120, 120, 120);
-        opacity: 1;
-        /* Firefox */
+        color: #2f2f2f;
     }
 
-    &::-ms-input-placeholder {
-        /* Microsoft Edge */
-        color: rgb(120, 120, 120);
+    &:focus {
+        background: rgba(255, 255, 118, 1);
+        scale: .95;
+    }
+
+    &.searchBarDark {
+        &:placeholder-shown {
+            background: #000;
+        }
+
+        &::placeholder {
+            color: #fff;
+        }
+
+        &:focus {
+            color: #fff;
+            background: #000;
+        }
     }
 }
 
-.button,
-.buttonWhite,
-.buttonDark {
+.buttonEdit,
+.buttonEditDark,
+.buttonMode,
+.buttonModeDark {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3.5rem;
-    height: 2rem;
-    border: none;
-    border-radius: 1rem;
-    color: #fff;
+    outline: none;
+    height: 2.5rem;
+    padding: .5rem 1rem;
+    font-family: 'Caveat Brush', cursive;
+    font-size: 16px;
+    letter-spacing: .2rem;
+    text-transform: uppercase;
     background: #000;
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border: 2px #000 solid;
+    box-shadow: 20px 38px 34px -26px rgba(0, 0, 0, 0.2);
+    transform: skew(-3deg, 1deg);
+    transition: all .5s ease;
 
-    &.button {
-        font-size: 26px;
+    &.buttonEdit {
+        width: 3.5rem;
+        font-size: 24px;
+        color: #000;
         background: rgb(96, 219, 68);
-        
     }
 
-    &.buttonDark {
-        color: #000;
-        background: #fff;
+    &.buttonEditDark,
+    &.buttonModeDark {
+        border: 2px #fff solid;
+        box-shadow: 20px 38px 34px -26px rgba(255, 255, 255, .8);
+
+        &.buttonEditDark {
+            width: 3.5rem;
+            font-size: 24px;
+        }
     }
 
     &:hover {
-        opacity: 80%;
-    }
-    &:active {
+        box-shadow: 2px 8px 4px -6px rgba(0, 0, 0, 0.8);
         scale: .95;
     }
-}
-
-.icon {
-    width: 1.5rem;
 }

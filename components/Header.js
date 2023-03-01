@@ -13,21 +13,22 @@ export default function Search({ handleFilteredNotes }) {
         <div className={styles.container} >
             <button
                 onClick={() => dispatch(editMode(!modes.editMode))}
-                className={styles.button} >
-                {modes.editMode ? <ImEyeBlocked className={styles.icon} /> : '+'}
+                className={modes.darkMode ? styles.buttonEditDark : styles.buttonEdit} >
+                {modes.editMode ? <ImEyeBlocked /> : '+'}
             </button>
-            <div className={styles.searchContainer} >
+            <div className={modes.darkMode ? styles.searchContainerDark : styles.searchContainer} >
                 <FaSearch />
                 <input
                     type='text'
-                    placeholder='Type to search a note...'
+                    placeholder='Search a note...'
                     onChange={(e) => handleFilteredNotes(e.target.value)}
-                    className={styles.searchBar} />
+                    className={modes.darkMode ? styles.searchBarDark : styles.searchBar}
+                />
             </div>
             <button
                 onClick={() => dispatch(darkMode(!modes.darkMode))}
-                className={modes.darkMode ? styles.buttonDark : styles.buttonWhite} >
-                Mode
+                className={modes.darkMode ? styles.buttonModeDark : styles.buttonMode} >
+                Dark
             </button>
         </div>
     )

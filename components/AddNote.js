@@ -26,7 +26,7 @@ export default function AddNote() {
                 />
                 <textarea
                     placeholder='Type to add text...'
-                    cols='45'
+                    // cols='45'
                     rows='10'
                     onChange={(e) => setTextNote(e.target.value)}
                     value={textNote}
