@@ -54,6 +54,8 @@
 
         &::placeholder {
             color: #fff;
+            background: #000;
+
         }
 
         &:focus {
@@ -70,7 +72,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    outline: none;
     height: 2.5rem;
     padding: .5rem 1rem;
     font-family: 'Caveat Brush', cursive;
@@ -83,6 +84,7 @@
     box-shadow: 20px 38px 34px -26px rgba(0, 0, 0, 0.2);
     transform: skew(-3deg, 1deg);
     transition: all .5s ease;
+    cursor: pointer;
 
     &.buttonEdit {
         width: 3.5rem;

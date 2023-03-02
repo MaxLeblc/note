@@ -14,8 +14,9 @@ export const noteSlice = createSlice({
                 id: nanoid(),
                 title: payload.title,
                 text: payload.text,
-                position: { x: 0, y: 600 },
                 date: new Date().toLocaleString(),
+                position: { x: 0, y: 600 },
+                size: payload.size,
             }
             state.value.push(newNote)
         },
@@ -45,8 +46,18 @@ export const noteSlice = createSlice({
                 } else return note
             })
         },
+        sizeAreaNote: (state, { payload }) => {
+            state.value = state.value.map((note) => {
+                if (note.id === payload[1]) {
+                    return {
+                        ...note,
+                        size: payload[0]
+                    }
+                } else return note
+            })
+        }
     }
 })
 
-export const { addNote, deleteNote, editNote, positionNote } = noteSlice.actions
+export const { addNote, deleteNote, editNote, positionNote, sizeAreaNote } = noteSlice.actions
 export default noteSlice.reducer

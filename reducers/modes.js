@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    value: { editMode: false, darkMode: false },
+    value: { editMode: false, darkMode: false, screenResizerMode: false },
 }
 
 export const modeSlice = createSlice({

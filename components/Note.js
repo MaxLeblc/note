@@ -1,9 +1,9 @@
 import styles from '../styles/Note.module.scss'
 import Draggable from 'react-draggable'
 import { FaTrash } from 'react-icons/fa'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteNote, editNote, positionNote } from '../reducers/notes'
+import { deleteNote, editNote, positionNote, sizeAreaNote } from '../reducers/notes'
 
 export default function Note({ note }) {
 
@@ -19,30 +19,47 @@ export default function Note({ note }) {
         }
     }, [editNoteTitle, editNoteText])
 
+
+    // dynamic rows for textarea
+    const areaRef = useRef(null)
+    const handleAreaHeight = () => {
+        if (areaRef.current) {
+            areaRef.current.style.height = "auto"
+            areaRef.current.style.height = areaRef.current.scrollHeight + "px"
+            dispatch(sizeAreaNote([areaRef.current.scrollHeight / 24, note.id])) // (areaRef.current.scrollHeight / note.size)
+        }
+    }
+
     return (
-        <Draggable defaultPosition={note.position} onStop={(data) => dispatch(positionNote([{ x: data.layerX, y: data.layerY }, note.id]))} handle={'.handle'} bounds="parent" >
+        <Draggable
+            defaultPosition={note.position}
+            onStop={(data) => dispatch(positionNote([{ x: data.layerX, y: data.layerY }, note.id]))}
+            handle={'.handle'}
+            // bounds="parent"
+        >
             <div className={styles.container} >
                 <div className={`${styles.handle}  ${'handle'}`} />
                 <div className={styles.description} >
                     <input
-                        onChange={(e) => { setEditNoteTitle(e.target.value) }}
-                        value={editNoteTitle}
-                        required
+                        onChange={(e) => setEditNoteTitle(e.target.value)}
+                        value={note.title}
+                        maxLength="18"
                     />
                     <textarea
-                        rows='14'
-                        onChange={(e) => { setEditNoteText(e.target.value) }}
-                        value={editNoteText}
-                        required
+                        rows={note.size}
+                        onChange={(e) => setEditNoteText(e.target.value)}
+                        value={note.text}
+                        onInput={handleAreaHeight}
+                        ref={areaRef}
                     />
                     {/* display note position & infos: */}
-                    <br /><span>x: {note.position.x.toFixed(0)}, y: {note.position.y.toFixed(0)} {note.title} {note.id}</span>
+                    {/* <br /><span>x: {note.position.x.toFixed(0)}, y: {note.position.y.toFixed(0)} {note.title} {note.id}</span> */}
                 </div>
                 <div className={styles.footer} >
-                    <p>edited: {note.date}</p>
+                    <p>Edited: {note.date}</p>
                     <FaTrash
                         className={styles.iconDelete}
-                        onClick={()=> dispatch(deleteNote(note.id))}
+                        onClick={() => dispatch(deleteNote(note.id))}
                     />
                 </div>
             </div>

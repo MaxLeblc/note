@@ -1,5 +1,5 @@
 import styles from '../styles/AddNote.module.scss'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { addNote } from '../reducers/notes'
 
@@ -11,25 +11,38 @@ export default function AddNote() {
     const [textNote, setTextNote] = useState('')
 
     const handleSave = () => {
-        if (textNote.trim().length > 0) dispatch(addNote({ title: titleNote, text: textNote }))
+        if (titleNote.trim().length > 0) dispatch(addNote({ title: titleNote, text: textNote, size: areaRef.current.scrollHeight / 24 })) // (areaRef.current.scrollHeight / note.size)
         setTitleNote('')
         setTextNote('')
+        areaRef.current.style.height = "auto" // reset AddNote box size after submit
     }
-
+    
+    // dynamic rows area
+    const areaRef = useRef(null)
+    const handleAreaHeight = () => {
+        if (areaRef.current) {
+            areaRef.current.style.height = "auto"
+            areaRef.current.style.height = areaRef.current.scrollHeight + "px"
+        }
+    }
+    
     return (
         <div className={styles.container} >
             <div className={styles.description} >
                 <input
-                    placeholder='Type to add title...'
+                    placeholder='Add title...'
                     onChange={(e) => setTitleNote(e.target.value)}
                     value={titleNote}
+                    maxLength="18"
+                    required
                 />
                 <textarea
-                    placeholder='Type to add text...'
-                    // cols='45'
-                    rows='10'
+                    placeholder='Add text...'
+                    rows='auto'
                     onChange={(e) => setTextNote(e.target.value)}
                     value={textNote}
+                    onInput={handleAreaHeight}
+                    ref={areaRef}
                 />
             </div>
 
